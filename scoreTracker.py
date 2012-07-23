@@ -48,11 +48,192 @@ GPIO.setup(SEG_E, GPIO.OUT);
 GPIO.setup(SEG_F, GPIO.OUT);
 GPIO.setup(SEG_G, GPIO.OUT);
 
+# Set everything to off
+def clear_all():
+	GPIO.output(OUT_TEAM1_WINS, GPIO.HIGH);
+	GPIO.output(OUT_TEAM1_SCORE, GPIO.HIGH);
+	GPIO.output(OUT_TEAM2_WINS, GPIO.HIGH);
+	GPIO.output(OUT_TEAM2_SCORE, GPIO.HIGH);
 
-while 1: 
-	if GPIO.input(IN_TEAM1_GOAL):
-		print "GOAL! -- TEAM 1";
-	elif GPIO.input(IN_TEAM2_GOAL):
-		print "GOAL! -- TEAM 2";
-	else:	
-		print "nothing";
+# Set everything to off
+def clear_display(display):
+	GPIO.output(display, GPIO.HIGH);
+
+# Print 0
+def print_zero(display):
+	GPIO.output(display, GPIO.LOW);
+	GPIO.output(SEG_A, GPIO.HIGH);
+	GPIO.output(SEG_B, GPIO.HIGH);		# Light up
+	GPIO.output(SEG_C, GPIO.HIGH);		# Light up
+	GPIO.output(SEG_D, GPIO.HIGH);
+	GPIO.output(SEG_E, GPIO.HIGH);
+	GPIO.output(SEG_F, GPIO.HIGH);
+	GPIO.output(SEG_G, GPIO.HIGH);
+
+# Print 1
+def print_one(display):
+	GPIO.output(display, GPIO.LOW);
+	GPIO.output(SEG_A, GPIO.LOW);
+	GPIO.output(SEG_B, GPIO.HIGH);		# Light up
+	GPIO.output(SEG_C, GPIO.HIGH);		# Light up
+	GPIO.output(SEG_D, GPIO.LOW);
+	GPIO.output(SEG_E, GPIO.LOW);
+	GPIO.output(SEG_F, GPIO.LOW);
+	GPIO.output(SEG_G, GPIO.LOW);
+
+# Print 2
+def print_two(display):
+	GPIO.output(display, GPIO.LOW);
+	GPIO.output(SEG_A, GPIO.HIGH);		# Light up
+	GPIO.output(SEG_B, GPIO.HIGH);		# Light up
+	GPIO.output(SEG_C, GPIO.LOW);
+	GPIO.output(SEG_D, GPIO.HIGH);		# Light up
+	GPIO.output(SEG_E, GPIO.HIGH);		# Light up
+	GPIO.output(SEG_F, GPIO.LOW);
+	GPIO.output(SEG_G, GPIO.HIGH);		# Light up
+
+# Print 3
+def print_three(display):
+	GPIO.output(display, GPIO.LOW);		# Enable display
+	GPIO.output(SEG_A, GPIO.HIGH);		# Light up
+	GPIO.output(SEG_B, GPIO.HIGH);		# Light up
+	GPIO.output(SEG_C, GPIO.HIGH);		# Light up
+	GPIO.output(SEG_D, GPIO.HIGH);		# Light up
+	GPIO.output(SEG_E, GPIO.LOW);
+	GPIO.output(SEG_F, GPIO.LOW);
+	GPIO.output(SEG_G, GPIO.HIGH);		# Light up
+
+# Print 4
+def print_four(display):
+	GPIO.output(display, GPIO.LOW);		# Enable display
+	GPIO.output(SEG_A, GPIO.LOW);
+	GPIO.output(SEG_B, GPIO.HIGH);
+	GPIO.output(SEG_C, GPIO.HIGH);
+	GPIO.output(SEG_D, GPIO.LOW);
+	GPIO.output(SEG_E, GPIO.LOW);
+	GPIO.output(SEG_F, GPIO.HIGH);
+	GPIO.output(SEG_G, GPIO.HIGH);
+
+# Print 5
+def print_five(display):
+	GPIO.output(display, GPIO.LOW);
+	GPIO.output(SEG_A, GPIO.HIGH);
+	GPIO.output(SEG_B, GPIO.LOW);
+	GPIO.output(SEG_C, GPIO.HIGH);
+	GPIO.output(SEG_D, GPIO.HIGH);
+	GPIO.output(SEG_E, GPIO.LOW);
+	GPIO.output(SEG_F, GPIO.HIGH);
+	GPIO.output(SEG_G, GPIO.HIGH);
+
+# Print 6
+def print_six(display):
+	GPIO.output(display, GPIO.LOW);
+	GPIO.output(SEG_A, GPIO.LOW);
+	GPIO.output(SEG_B, GPIO.LOW);
+	GPIO.output(SEG_C, GPIO.HIGH);
+	GPIO.output(SEG_D, GPIO.HIGH);
+	GPIO.output(SEG_E, GPIO.HIGH);
+	GPIO.output(SEG_F, GPIO.HIGH);
+	GPIO.output(SEG_G, GPIO.HIGH);
+
+# Print 7
+def print_seven(display):
+	GPIO.output(display, GPIO.LOW);
+	GPIO.output(SEG_A, GPIO.HIGH);
+	GPIO.output(SEG_B, GPIO.HIGH);
+	GPIO.output(SEG_C, GPIO.HIGH);
+	GPIO.output(SEG_D, GPIO.LOW);
+	GPIO.output(SEG_E, GPIO.LOW);
+	GPIO.output(SEG_F, GPIO.LOW);
+	GPIO.output(SEG_G, GPIO.LOW);
+
+# Print 8
+def print_eight(display):
+	GPIO.output(display, GPIO.LOW);
+	GPIO.output(SEG_A, GPIO.HIGH);
+	GPIO.output(SEG_B, GPIO.HIGH);
+	GPIO.output(SEG_C, GPIO.HIGH);
+	GPIO.output(SEG_D, GPIO.HIGH);
+	GPIO.output(SEG_E, GPIO.HIGH);
+	GPIO.output(SEG_F, GPIO.HIGH);
+	GPIO.output(SEG_G, GPIO.HIGH);
+
+# Print 9
+def print_nine(display):
+	GPIO.output(display, GPIO.LOW);
+	GPIO.output(SEG_A, GPIO.HIGH);
+	GPIO.output(SEG_B, GPIO.HIGH);
+	GPIO.output(SEG_C, GPIO.HIGH);
+	GPIO.output(SEG_D, GPIO.LOW);
+	GPIO.output(SEG_E, GPIO.LOW);
+	GPIO.output(SEG_F, GPIO.HIGH);
+	GPIO.output(SEG_G, GPIO.HIGH);
+
+
+
+
+
+
+# Begin Logic
+
+
+
+clear_all();
+
+
+while True:
+	print_one(OUT_TEAM1_WINS);
+	time.sleep(1);
+	clear_display(OUT_TEAM1_WINS);
+	print_two(OUT_TEAM1_SCORE);
+	time.sleep(1);
+	clear_display(OUT_TEAM1_SCORE);
+	print_three(OUT_TEAM2_SCORE);
+	time.sleep(1);
+	clear_display(OUT_TEAM2_SCORE);
+	print_four(OUT_TEAM2_WINS);
+	time.sleep(1);
+	clear_display(OUT_TEAM2_WINS);
+	print_five(OUT_TEAM1_WINS);
+	time.sleep(1);
+	clear_display(OUT_TEAM1_WINS);
+	print_six(OUT_TEAM1_SCORE);
+	time.sleep(1);
+	clear_display(OUT_TEAM1_SCORE);
+	print_seven(OUT_TEAM2_SCORE);
+	time.sleep(1);
+	clear_display(OUT_TEAM2_SCORE);
+	print_eight(OUT_TEAM2_WINS);
+	time.sleep(1);
+	clear_display(OUT_TEAM2_WINS);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#while 1: 
+#	if GPIO.input(IN_TEAM1_GOAL):
+#		print "GOAL! -- TEAM 1";
+#	elif GPIO.input(IN_TEAM2_GOAL):
+#		print "GOAL! -- TEAM 2";
+#	else:	
+#		print "nothing";
