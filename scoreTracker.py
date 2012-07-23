@@ -52,7 +52,7 @@ GPIO.setup(SEG_G, GPIO.OUT);
 while 1: 
 	if GPIO.input(IN_TEAM1_GOAL):
 		print "GOAL! -- TEAM 1";
-	elseif GPIO.input(IN_TEAM2_GOAL):
+	elif GPIO.input(IN_TEAM2_GOAL):
 		print "GOAL! -- TEAM 2";
 	else:	
 		print "nothing";
