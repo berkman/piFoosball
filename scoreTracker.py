@@ -5,6 +5,10 @@ import RPi.GPIO as GPIO, time
 GPIO.setmode(GPIO.BCM);
 GPIO.setwarnings(False);
 
+# Max score and wins
+MAX_SCORE = 		5;
+MAX_WINS =		2;
+
 
 # Capture the Button Press (Goal)
 IN_TEAM1_GOAL = 	8;	# Goal sensor 1, Pi input pin
@@ -35,7 +39,6 @@ SEG_PER = 		15;	# Period segment
 # Setup the Pins
 GPIO.setup(IN_TEAM1_GOAL, GPIO.IN);
 GPIO.setup(IN_TEAM2_GOAL, GPIO.IN);
-
 GPIO.setup(OUT_TEAM1_WINS, GPIO.OUT);
 GPIO.setup(OUT_TEAM1_SCORE, GPIO.OUT);
 GPIO.setup(OUT_TEAM2_WINS, GPIO.OUT);
@@ -68,7 +71,7 @@ def print_zero(display):
 	GPIO.output(SEG_D, GPIO.HIGH);
 	GPIO.output(SEG_E, GPIO.HIGH);
 	GPIO.output(SEG_F, GPIO.HIGH);
-	GPIO.output(SEG_G, GPIO.HIGH);
+	GPIO.output(SEG_G, GPIO.LOW);
 
 # Print 1
 def print_one(display):
@@ -169,71 +172,91 @@ def print_nine(display):
 	GPIO.output(SEG_F, GPIO.HIGH);
 	GPIO.output(SEG_G, GPIO.HIGH);
 
+# Print Dash
+def print_dash(display):
+	GPIO.output(display, GPIO.LOW);
+	GPIO.output(SEG_A, GPIO.HIGH);
+	GPIO.output(SEG_B, GPIO.HIGH);
+	GPIO.output(SEG_C, GPIO.HIGH);
+	GPIO.output(SEG_D, GPIO.HIGH);
+	GPIO.output(SEG_E, GPIO.HIGH);
+	GPIO.output(SEG_F, GPIO.HIGH);
+	GPIO.output(SEG_G, GPIO.LOW);
 
+def print_digit(output,value):
+	if value == 1:
+		print_one(output);
+	elif value == 2:
+		print_two(output);
+	elif value == 3:
+		print_three(output);
+	elif value == 4:
+		print_four(output);
+	elif value == 5:
+		print_five(output);
+	elif value == 6:
+		print_six(output);
+	elif value == 7:
+		print_seven(output);
+	elif value == 8:
+		print_eight(output);
+	elif value == 9:
+		print_nine(output);
+	else:
+		print_zero(output);
 
-
+	time.sleep(.001);
+	clear_all();
 
 
 # Begin Logic
-
-
-
 clear_all();
 
 
 while True:
-	print_one(OUT_TEAM1_WINS);
-	time.sleep(1);
-	clear_display(OUT_TEAM1_WINS);
-	print_two(OUT_TEAM1_SCORE);
-	time.sleep(1);
-	clear_display(OUT_TEAM1_SCORE);
-	print_three(OUT_TEAM2_SCORE);
-	time.sleep(1);
-	clear_display(OUT_TEAM2_SCORE);
-	print_four(OUT_TEAM2_WINS);
-	time.sleep(1);
-	clear_display(OUT_TEAM2_WINS);
-	print_five(OUT_TEAM1_WINS);
-	time.sleep(1);
-	clear_display(OUT_TEAM1_WINS);
-	print_six(OUT_TEAM1_SCORE);
-	time.sleep(1);
-	clear_display(OUT_TEAM1_SCORE);
-	print_seven(OUT_TEAM2_SCORE);
-	time.sleep(1);
-	clear_display(OUT_TEAM2_SCORE);
-	print_eight(OUT_TEAM2_WINS);
-	time.sleep(1);
-	clear_display(OUT_TEAM2_WINS);
+	if GPIO.input(IN_TEAM1_GOAL):		# Team 1 scores a goal
+		TEAM1_SCORE+=1;
+
+		if TEAM1_SCORE >= MAX_SCORE and TEAM2_SCORE == 0 and TEAM2_WINS == 0:	# Skunk rule
+			TEAM1_SCORE = 	0;
+			TEAM2_SCORE = 	0;
+			TEAM1_WINS = 	0;
+			TEAM2_WINS = 	0;
+		elif TEAM1_SCORE >= MAX_SCORE:
+			TEAM1_SCORE = 	0;
+			TEAM2_SCORE = 	0;
+			TEAM1_WINS += 	1;
+
+		if TEAM1_WINS >= MAX_WINS:
+			TEAM1_SCORE = 	0;
+			TEAM1_WINS = 	0;
+			TEAM2_SCORE = 	0;
+			TEAM2_WINS = 	0;
+
+		time.sleep(.5);
+	elif GPIO.input(IN_TEAM2_GOAL):		# Team 2 scores a goal
+		TEAM2_SCORE+=1;
+
+		if TEAM2_SCORE >= MAX_SCORE and TEAM1_SCORE == 0 and TEAM1_WINS == 0:	# Skunk rule
+			TEAM1_SCORE = 	0;
+			TEAM2_SCORE = 	0;
+			TEAM1_WINS = 	0;
+			TEAM2_WINS = 	0;
+		elif TEAM2_SCORE >= MAX_SCORE:
+			TEAM1_SCORE = 	0;
+			TEAM2_SCORE = 	0;
+			TEAM2_WINS += 	1;
+
+		if TEAM2_WINS >= MAX_WINS:
+			TEAM1_SCORE = 	0;
+			TEAM1_WINS = 	0;
+			TEAM2_SCORE = 	0;
+			TEAM2_WINS = 	0;
+
+		time.sleep(.5);
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#while 1: 
-#	if GPIO.input(IN_TEAM1_GOAL):
-#		print "GOAL! -- TEAM 1";
-#	elif GPIO.input(IN_TEAM2_GOAL):
-#		print "GOAL! -- TEAM 2";
-#	else:	
-#		print "nothing";
+	print_digit(OUT_TEAM1_WINS,TEAM1_WINS);
+	print_digit(OUT_TEAM1_SCORE,TEAM1_SCORE);
+	print_digit(OUT_TEAM2_SCORE,TEAM2_SCORE);
+	print_digit(OUT_TEAM2_WINS,TEAM2_WINS);
