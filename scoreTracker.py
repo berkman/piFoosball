@@ -1,13 +1,16 @@
 #!/usr/bin/env python
 
-import RPi.GPIO as GPIO, time
+#import RPi.GPIO as GPIO, time
+import SevenSegmentDisplay
 
+'''
 GPIO.setmode(GPIO.BCM);
 GPIO.setwarnings(False);
+'''
 
 # Max score and wins
-MAX_SCORE = 	5;
-MAX_WINS =		2;
+MAX_SCORE = 		5;
+MAX_WINS =			2;
 
 
 # Capture the Button Press (Goal)
@@ -27,16 +30,17 @@ TEAM2_WINS = 		0;	# Number of games won by team 2
 TEAM2_SCORE = 		0;	# Number of goals by team 2
 
 # 7-segment Pin mapping
-SEG_A = 		4;	# Top middle segment
-SEG_B = 		17;	# Top right segment
-SEG_C = 		21;	# Bottom right segment
-SEG_D = 		22;	# Bottom middle segment
-SEG_E = 		10;	# Bottom left segment
-SEG_F = 		9;	# Top left segment
-SEG_G = 		11;	# Middle segment
-SEG_PER = 		15;	# Period segment
+SEG_A = 			4;	# Top middle segment
+SEG_B = 			17;	# Top right segment
+SEG_C = 			21;	# Bottom right segment
+SEG_D = 			22;	# Bottom middle segment
+SEG_E = 			10;	# Bottom left segment
+SEG_F = 			9;	# Top left segment
+SEG_G = 			11;	# Middle segment
+SEG_PER = 			15;	# Period segment
 
 # Setup the Pins
+'''
 GPIO.setup(IN_TEAM1_GOAL, GPIO.IN);
 GPIO.setup(IN_TEAM2_GOAL, GPIO.IN);
 GPIO.setup(OUT_TEAM1_WINS, GPIO.OUT);
@@ -260,3 +264,4 @@ while True:
 	print_digit(OUT_TEAM1_SCORE,TEAM1_SCORE);
 	print_digit(OUT_TEAM2_SCORE,TEAM2_SCORE);
 	print_digit(OUT_TEAM2_WINS,TEAM2_WINS);
+'''
