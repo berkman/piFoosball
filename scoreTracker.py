@@ -6,7 +6,7 @@ GPIO.setmode(GPIO.BCM);
 GPIO.setwarnings(False);
 
 # Max score and wins
-MAX_SCORE = 		5;
+MAX_SCORE = 	5;
 MAX_WINS =		2;
 
 
