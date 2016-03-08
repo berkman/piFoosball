@@ -1,12 +1,10 @@
 #!/usr/bin/env python
 
-import RPi.GPIO as GPIO, time
-import SevenSegmentDisplay
+import RPi.GPIO as GPIO
+import time
+from SevenSegmentDisplay import SevenSegmentDisplay
 
-'''
-GPIO.setmode(GPIO.BCM)
-GPIO.setwarnings(False)
-'''
+
 
 my_display = SevenSegmentDisplay()
 
