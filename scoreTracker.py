@@ -4,6 +4,7 @@ import RPi.GPIO as GPIO
 import time
 from SevenSegmentDisplay import SevenSegmentDisplay
 
+GPIO.setmode(GPIO.BCM)      # Broadcom chip-specific pin numbers
 
 
 my_display = SevenSegmentDisplay()

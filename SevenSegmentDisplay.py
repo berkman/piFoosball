@@ -3,9 +3,6 @@
 import RPi.GPIO as GPIO
 import time
 
-GPIO.setmode(GPIO.BCM)      # Broadcom chip-specific pin numbers
-GPIO.setwarnings(False)
-
 class SevenSegmentDisplay(object):
     # what does this class do?
 
@@ -21,6 +18,9 @@ class SevenSegmentDisplay(object):
 
     def __init__(self):
         # setup display
+        GPIO.setmode(GPIO.BCM)               # Broadcom chip-specific pin numbers
+        GPIO.setwarnings(False)
+
         GPIO.setup(self.SEG_A, GPIO.OUT)     # declare this PIN as an OUTPUT
         GPIO.setup(self.SEG_B, GPIO.OUT)
         GPIO.setup(self.SEG_C, GPIO.OUT)
