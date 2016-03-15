@@ -27,6 +27,7 @@ class SevenSegmentDisplay(object):
         GPIO.setup(self.SEG_E, GPIO.OUT)
         GPIO.setup(self.SEG_F, GPIO.OUT)
         GPIO.setup(self.SEG_G, GPIO.OUT)
+        GPIO.setup(self.SEG_PER, GPIO.OUT)
 
         GPIO.setup(18, GPIO.OUT)
 
@@ -44,6 +45,7 @@ class SevenSegmentDisplay(object):
     	GPIO.output(self.SEG_E, GPIO.HIGH)     # Light up
     	GPIO.output(self.SEG_F, GPIO.HIGH)     # Light up
     	GPIO.output(self.SEG_G, GPIO.LOW)
+    	GPIO.output(self.SEG_PER, GPIO.LOW)
 
     # Print 1
     def print_one(self, display):
@@ -55,6 +57,7 @@ class SevenSegmentDisplay(object):
     	GPIO.output(self.SEG_E, GPIO.LOW)
     	GPIO.output(self.SEG_F, GPIO.LOW)
     	GPIO.output(self.SEG_G, GPIO.LOW)
+    	GPIO.output(self.SEG_PER, GPIO.LOW)
 
     # Print 2
     def print_two(self, display):
@@ -66,6 +69,7 @@ class SevenSegmentDisplay(object):
     	GPIO.output(self.SEG_E, GPIO.HIGH)     # Light up
     	GPIO.output(self.SEG_F, GPIO.LOW)
     	GPIO.output(self.SEG_G, GPIO.HIGH)     # Light up
+    	GPIO.output(self.SEG_PER, GPIO.LOW)
 
     # Print 3
     def print_three(self, display):
@@ -77,6 +81,7 @@ class SevenSegmentDisplay(object):
     	GPIO.output(self.SEG_E, GPIO.LOW)
     	GPIO.output(self.SEG_F, GPIO.LOW)
     	GPIO.output(self.SEG_G, GPIO.HIGH)     # Light up
+    	GPIO.output(self.SEG_PER, GPIO.LOW)
 
     # Print 4
     def print_four(self, display):
@@ -88,6 +93,7 @@ class SevenSegmentDisplay(object):
     	GPIO.output(self.SEG_E, GPIO.LOW)
     	GPIO.output(self.SEG_F, GPIO.HIGH)     # Light up
     	GPIO.output(self.SEG_G, GPIO.HIGH)     # Light up
+    	GPIO.output(self.SEG_PER, GPIO.LOW)
 
     # Print 5
     def print_five(self, display):
@@ -99,6 +105,7 @@ class SevenSegmentDisplay(object):
     	GPIO.output(self.SEG_E, GPIO.LOW)
     	GPIO.output(self.SEG_F, GPIO.HIGH)     # Light up
     	GPIO.output(self.SEG_G, GPIO.HIGH)     # Light up
+    	GPIO.output(self.SEG_PER, GPIO.LOW)
 
     # Print 6
     def print_six(self, display):
@@ -110,6 +117,7 @@ class SevenSegmentDisplay(object):
     	GPIO.output(self.SEG_E, GPIO.HIGH)     # Light up
     	GPIO.output(self.SEG_F, GPIO.HIGH)     # Light up
     	GPIO.output(self.SEG_G, GPIO.HIGH)     # Light up
+    	GPIO.output(self.SEG_PER, GPIO.LOW)
 
     # Print 7
     def print_seven(self, display):
@@ -121,6 +129,7 @@ class SevenSegmentDisplay(object):
     	GPIO.output(self.SEG_E, GPIO.LOW)
     	GPIO.output(self.SEG_F, GPIO.LOW)
     	GPIO.output(self.SEG_G, GPIO.LOW)
+    	GPIO.output(self.SEG_PER, GPIO.LOW)
 
     # Print 8
     def print_eight(self, display):
@@ -132,6 +141,7 @@ class SevenSegmentDisplay(object):
     	GPIO.output(self.SEG_E, GPIO.HIGH)     # Light up
     	GPIO.output(self.SEG_F, GPIO.HIGH)     # Light up
     	GPIO.output(self.SEG_G, GPIO.HIGH)     # Light up
+    	GPIO.output(self.SEG_PER, GPIO.LOW)
 
     # Print 9
     def print_nine(self, display):
@@ -143,39 +153,59 @@ class SevenSegmentDisplay(object):
     	GPIO.output(self.SEG_E, GPIO.LOW)
     	GPIO.output(self.SEG_F, GPIO.HIGH)     # Light up
     	GPIO.output(self.SEG_G, GPIO.HIGH)     # Light up
+    	GPIO.output(self.SEG_PER, GPIO.LOW)
 
-    # Print Dash TODO
+    # Print Dash
     def print_dash(self, display):
-    	GPIO.output(display, GPIO.LOW)		   # Enable display
-    	GPIO.output(self.SEG_A, GPIO.HIGH)     # Light up
-    	GPIO.output(self.SEG_B, GPIO.HIGH)     # Light up
-    	GPIO.output(self.SEG_C, GPIO.HIGH)     # Light up
-    	GPIO.output(self.SEG_D, GPIO.HIGH)     # Light up
-    	GPIO.output(self.SEG_E, GPIO.HIGH)     # Light up
-    	GPIO.output(self.SEG_F, GPIO.HIGH)     # Light up
+    	GPIO.output(display, GPIO.LOW)
+    	GPIO.output(self.SEG_A, GPIO.LOW)
+    	GPIO.output(self.SEG_B, GPIO.LOW)
+    	GPIO.output(self.SEG_C, GPIO.LOW)
+    	GPIO.output(self.SEG_D, GPIO.LOW)
+    	GPIO.output(self.SEG_E, GPIO.LOW)
+    	GPIO.output(self.SEG_F, GPIO.LOW)
+    	GPIO.output(self.SEG_G, GPIO.HIGH)
+    	GPIO.output(self.SEG_PER, GPIO.LOW)
+
+    # Print Period
+    def print_period(self, display):
+    	GPIO.output(display, GPIO.LOW)
+    	GPIO.output(self.SEG_A, GPIO.LOW)
+    	GPIO.output(self.SEG_B, GPIO.LOW)
+    	GPIO.output(self.SEG_C, GPIO.LOW)
+    	GPIO.output(self.SEG_D, GPIO.LOW)
+    	GPIO.output(self.SEG_E, GPIO.LOW)
+    	GPIO.output(self.SEG_F, GPIO.LOW)
     	GPIO.output(self.SEG_G, GPIO.LOW)
+    	GPIO.output(self.SEG_PER, GPIO.HIGH)
 
     def flash_digit(self, display, value, duration):
-    	if value == 1:
-    		print_one(display)
-    	elif value == 2:
-    		print_two(display)
-    	elif value == 3:
-    		print_three(display)
-    	elif value == 4:
-    		print_four(display)
-    	elif value == 5:
-    		print_five(display)
-    	elif value == 6:
-    		print_six(display)
-    	elif value == 7:
-    		print_seven(display)
-    	elif value == 8:
-    		print_eight(display)
-    	elif value == 9:
-    		print_nine(display)
+    	if value == '0':
+    		self.print_zero(display)
+    	elif value == '1':
+    		self.print_one(display)
+    	elif value == '2':
+    		self.print_two(display)
+    	elif value == '3':
+    		self.print_three(display)
+    	elif value == '4':
+    		self.print_four(display)
+    	elif value == '5':
+    		self.print_five(display)
+    	elif value == '6':
+    		self.print_six(display)
+    	elif value == '7':
+    		self.print_seven(display)
+    	elif value == '8':
+    		self.print_eight(display)
+    	elif value == '9':
+    		self.print_nine(display)
+    	elif value == '-':
+    		self.print_dash(display)
+    	elif value == '.':
+    		self.print_period(display)
     	else:
-    		print_zero(display)
+        	self.clear_display(display)
 
     	time.sleep(duration)
-        clear_display(display)
+        self.clear_display(display)
