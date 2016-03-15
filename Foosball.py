@@ -40,7 +40,8 @@ class FoosballGame(object):
 	def win_game(self, team):
 		team.wins += 1
 
-		self.team1.score = 0	# TODO - make a reset function?
+		# TODO - make a reset function?
+		self.team1.score = 0
 		self.team2.score = 0
 
 		print "Game Winner!  Team %s" % team.name
@@ -59,7 +60,8 @@ class FoosballMatch(object):
 
 	game = FoosballGame(0)
 
-	def __init__(self, max_wins, max_score, team1=FoosballTeam(""), team2=FoosballTeam("")):	#TODO - must be more than 1 match, 1 game
+	def __init__(self, max_wins, max_score, team1=FoosballTeam(""), team2=FoosballTeam("")):
+		#TODO - must be more than 1 match, 1 game
 		self.max_wins = max_wins
 		self.team1 = team1
 		self.team2 = team2
@@ -77,7 +79,8 @@ class FoosballMatch(object):
 			self.win_match(team)
 
 	def win_match(self, team):
-		self.team1.wins = 0	# TODO - make a reset function?
+		# TODO - make a reset function?
+		self.team1.wins = 0
 		self.team2.wins = 0
 
 		print "Match Winner!  Team %s" % team.name
