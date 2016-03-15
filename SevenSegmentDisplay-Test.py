@@ -3,17 +3,21 @@
 import time
 from SevenSegmentDisplay import SevenSegmentDisplay
 
-my_display = SevenSegmentDisplay()
+my_displays = [18, 23, 24, 25]
+duration = .1
 
-my_display.flash_digit(18, '0', 1)
-my_display.flash_digit(18, '1', 1)
-my_display.flash_digit(18, '2', 1)
-my_display.flash_digit(18, '3', 1)
-my_display.flash_digit(18, '4', 1)
-my_display.flash_digit(18, '5', 1)
-my_display.flash_digit(18, '6', 1)
-my_display.flash_digit(18, '7', 1)
-my_display.flash_digit(18, '8', 1)
-my_display.flash_digit(18, '9', 1)
-my_display.flash_digit(18, '-', 1)
-my_display.flash_digit(18, '.', 1)
+for display in my_displays:
+	my_display = SevenSegmentDisplay(display)
+
+	my_display.flash_digit(display, '0', duration)
+	my_display.flash_digit(display, '1', duration)
+	my_display.flash_digit(display, '2', duration)
+	my_display.flash_digit(display, '3', duration)
+	my_display.flash_digit(display, '4', duration)
+	my_display.flash_digit(display, '5', duration)
+	my_display.flash_digit(display, '6', duration)
+	my_display.flash_digit(display, '7', duration)
+	my_display.flash_digit(display, '8', duration)
+	my_display.flash_digit(display, '9', duration)
+	my_display.flash_digit(display, '-', duration)
+	my_display.flash_digit(display, '.', duration)

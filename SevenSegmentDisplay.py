@@ -7,7 +7,7 @@ class SevenSegmentDisplay(object):
     # 7-segment Pin mapping
     SEG_A =     4	# Top middle segment
     SEG_B = 	17	# Top right segment
-    SEG_C = 	21	# Bottom right segment
+    SEG_C = 	1	# Bottom right segment
     SEG_D = 	22	# Bottom middle segment
     SEG_E = 	10	# Bottom left segment
     SEG_F = 	9	# Top left segment
@@ -15,7 +15,7 @@ class SevenSegmentDisplay(object):
     SEG_PER = 	15	# Period segment
 
 
-    def __init__(self):
+    def __init__(self, display_pin=18):
         # setup display
         GPIO.setmode(GPIO.BCM)               # Broadcom chip-specific pin numbers
         GPIO.setwarnings(False)
@@ -29,7 +29,7 @@ class SevenSegmentDisplay(object):
         GPIO.setup(self.SEG_G, GPIO.OUT)
         GPIO.setup(self.SEG_PER, GPIO.OUT)
 
-        GPIO.setup(18, GPIO.OUT)
+        GPIO.setup(display_pin, GPIO.OUT)
 
     # Set all segments to off
     def clear_display(self, display):
