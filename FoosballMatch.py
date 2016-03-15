@@ -9,6 +9,7 @@ class FoosballMatch(object):
 	MAX_SCORE = 		5
 	MAX_WINS =			2
 
+	
 	# Capture the Button Press (Goal)
 	IN_TEAM1_GOAL = 	8	# Goal sensor 1, Pi input pin
 	IN_TEAM2_GOAL = 	7	# Goal sensor 2, Pi input pin
