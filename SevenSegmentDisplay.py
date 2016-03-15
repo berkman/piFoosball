@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 import RPi.GPIO as GPIO
 import time
 
@@ -16,6 +14,7 @@ class SevenSegmentDisplay(object):
     SEG_G = 	11	# Middle segment
     SEG_PER = 	15	# Period segment
 
+
     def __init__(self):
         # setup display
         GPIO.setmode(GPIO.BCM)               # Broadcom chip-specific pin numbers
@@ -28,6 +27,8 @@ class SevenSegmentDisplay(object):
         GPIO.setup(self.SEG_E, GPIO.OUT)
         GPIO.setup(self.SEG_F, GPIO.OUT)
         GPIO.setup(self.SEG_G, GPIO.OUT)
+
+        GPIO.setup(18, GPIO.OUT)
 
     # Set all segments to off
     def clear_display(self, display):
