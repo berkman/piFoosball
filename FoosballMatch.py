@@ -1,93 +1,102 @@
 #!/usr/bin/env python
 
-import RPi.GPIO as GPIO
-import time
-from SevenSegmentDisplay import SevenSegmentDisplay
+#import time
+
+class FoosballTeam(object):
+	wins =	0
+	score = 0
+	name = ""
+
+	def __init__(self, name):
+		self.wins = 0
+		self.score = 0
+		self.name = name
+
+	def display_score(self):
+		return "%d - %d" % (self.wins, self.score)
+
+	def score_goal(self):
+		self.score += 1
+
+	def set_name(self, name):
+		self.name = name
+
+class FoosballGame(object):
+	max_score = 5
+
+	team1 = FoosballTeam("")
+	team2 = FoosballTeam("")
+
+	def __init__(self, max_score):
+		self.max_score = max_score
+
+	def display_score(self):
+		return "%s(%d) : %s(%d)" % \
+			(self.team1.name, self.team1.score, self.team2.name, self.team2.score)
+
+	def win_game(self, team):
+		team.wins += 1
+
+		self.team1.score = 0
+		self.team2.score = 0
+
+		print "Winner!  Team %s" % team.name
+		# increment wins?
+
+	def score_goal(self, team):
+		team.score_goal()
+
+		if team.score >= self.max_score:
+			self.win_game(team)
 
 class FoosballMatch(object):
-	# Max score and wins
-	MAX_SCORE = 		5
-	MAX_WINS =			2
+	max_wins =	2
 
-	
-	# Capture the Button Press (Goal)
-	IN_TEAM1_GOAL = 	8	# Goal sensor 1, Pi input pin
-	IN_TEAM2_GOAL = 	7	# Goal sensor 2, Pi input pin
+	def __init__(self, max_wins):
+		self.max_wins = max_wins
 
-	# Send signal to a certain display (1, 2, 3 or 4)
-	OUT_TEAM1_WINS = 	18 	# Display 1, Pi output pin
-	OUT_TEAM1_SCORE = 	23 	# Display 2, Pi output pin
-	OUT_TEAM2_WINS = 	24 	# Display 4, Pi output pin
-	OUT_TEAM2_SCORE = 	25 	# Display 3, Pi output pin
+	def display_score(self):
+		return "%d - %d : %d - %d" % \
+			(self.team_1_wins, self.team_1_score, self.team_2_score, self.team_2_wins)
 
-	my_display = SevenSegmentDisplay()
 
-    def __init__(self):
-		TEAM1_WINS = 	0	# Number of games won by team 1
-		TEAM1_SCORE = 	0	# Number of goals by team 1
-		TEAM2_WINS = 	0	# Number of games won by team 2
-		TEAM2_SCORE = 	0	# Number of goals by team 2
+my_match = FoosballMatch(2)
+my_game = FoosballGame(5)
+my_game.team1.set_name("red")
 
-		GPIO.setmode(GPIO.BCM)      # Broadcom chip-specific pin numbers
 
-		# Setup the Pins
-		GPIO.setup(self.IN_TEAM1_GOAL, GPIO.IN)
-		GPIO.setup(self.IN_TEAM2_GOAL, GPIO.IN)
-		GPIO.setup(self.OUT_TEAM1_WINS, GPIO.OUT)
-		GPIO.setup(self.OUT_TEAM1_SCORE, GPIO.OUT)
-		GPIO.setup(self.OUT_TEAM2_WINS, GPIO.OUT)
-		GPIO.setup(self.OUT_TEAM2_SCORE, GPIO.OUT)
+print my_game.display_score()
+my_game.score_goal(my_game.team1)
+print my_game.display_score()
+my_game.score_goal(my_game.team1)
+print my_game.display_score()
+my_game.score_goal(my_game.team1)
+print my_game.display_score()
+my_game.score_goal(my_game.team2)
+print my_game.display_score()
+my_game.score_goal(my_game.team1)
+print my_game.display_score()
+my_game.score_goal(my_game.team1)
+print my_game.display_score()
+my_game.score_goal(my_game.team1)
+print my_game.display_score()
+my_game.score_goal(my_game.team1)
+print my_game.display_score()
 
-		# Begin Logic
-		my_display.clear(self.OUT_TEAM1_WINS)
-		my_display.clear(self.OUT_TEAM1_SCORE)
-		my_display.clear(self.OUT_TEAM2_SCORE)
-		my_display.clear(self.OUT_TEAM2_WINS)
+print my_game.team1.wins
+print my_game.team2.wins
 
-	def new_game(self):
-		while True:
-			if GPIO.input(self.IN_TEAM1_GOAL):		# Team 1 scores a goal
-				self.TEAM1_SCORE += 1
 
-				if TEAM1_SCORE >= MAX_SCORE and TEAM2_SCORE == 0 and TEAM2_WINS == 0:	# Skunk rule
-					TEAM1_SCORE = 	0
-					TEAM2_SCORE = 	0
-					TEAM1_WINS = 	0
-					TEAM2_WINS = 	0
-				elif TEAM1_SCORE >= MAX_SCORE:
-					TEAM1_SCORE = 	0
-					TEAM2_SCORE = 	0
-					TEAM1_WINS += 	1
+'''
+if TEAM1_SCORE >= MAX_SCORE and TEAM2_SCORE == 0 and TEAM2_WINS == 0:
+	TEAM1_SCORE = 	0
+	TEAM2_SCORE = 	0
+	TEAM1_WINS = 	0
+	TEAM2_WINS = 	0
 
-				if TEAM1_WINS >= MAX_WINS:
-					TEAM1_SCORE = 	0
-					TEAM1_WINS = 	0
-					TEAM2_SCORE = 	0
-					TEAM2_WINS = 	0
-
-				time.sleep(.5)
-			elif GPIO.input(self.IN_TEAM2_GOAL):		# Team 2 scores a goal
-				self.TEAM2_SCORE += 1
-
-				if TEAM2_SCORE >= MAX_SCORE and TEAM1_SCORE == 0 and TEAM1_WINS == 0:	# Skunk rule
-					TEAM1_SCORE = 	0
-					TEAM2_SCORE = 	0
-					TEAM1_WINS = 	0
-					TEAM2_WINS = 	0
-				elif TEAM2_SCORE >= MAX_SCORE:
-					TEAM1_SCORE = 	0
-					TEAM2_SCORE = 	0
-					TEAM2_WINS += 	1
-
-				if TEAM2_WINS >= MAX_WINS:
-					TEAM1_SCORE = 	0
-					TEAM1_WINS = 	0
-					TEAM2_SCORE = 	0
-					TEAM2_WINS = 	0
-
-				time.sleep(0.5)
-
-			my_display.flash_digit(OUT_TEAM1_WINS,TEAM1_WINS, 0.001)
-			my_display.flash_digit(OUT_TEAM1_SCORE,TEAM1_SCORE, 0.001)
-			my_display.flash_digit(OUT_TEAM2_SCORE,TEAM2_SCORE, 0.001)
-			my_display.flash_digit(OUT_TEAM2_WINS,TEAM2_WINS, 0.001)
+if TEAM1_WINS >= MAX_WINS:
+	TEAM1_SCORE = 	0
+	TEAM1_WINS = 	0
+	TEAM2_SCORE = 	0
+	TEAM2_WINS = 	0
+'''
