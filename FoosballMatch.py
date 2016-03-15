@@ -22,12 +22,12 @@ class FoosballMatch(object):
 	my_display = SevenSegmentDisplay()
 
     def __init__(self):
-		GPIO.setmode(GPIO.BCM)      # Broadcom chip-specific pin numbers
-
 		TEAM1_WINS = 	0	# Number of games won by team 1
 		TEAM1_SCORE = 	0	# Number of goals by team 1
 		TEAM2_WINS = 	0	# Number of games won by team 2
 		TEAM2_SCORE = 	0	# Number of goals by team 2
+
+		GPIO.setmode(GPIO.BCM)      # Broadcom chip-specific pin numbers
 
 		# Setup the Pins
 		GPIO.setup(self.IN_TEAM1_GOAL, GPIO.IN)
