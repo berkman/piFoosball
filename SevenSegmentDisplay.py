@@ -191,25 +191,25 @@ class SevenSegmentDisplay(object):
     	GPIO.output(self.segment_p, GPIO.HIGH)
 
     def flash_digit(self, value, duration):
-    	if value == '0':
+    	if value == 0:
     		self.print_zero()
-    	elif value == '1':
+    	elif value == 1:
     		self.print_one()
-    	elif value == '2':
+    	elif value == 2:
     		self.print_two()
-    	elif value == '3':
+    	elif value == 3:
     		self.print_three()
-    	elif value == '4':
+    	elif value == 4:
     		self.print_four()
-    	elif value == '5':
+    	elif value == 5:
     		self.print_five()
-    	elif value == '6':
+    	elif value == 6:
     		self.print_six()
-    	elif value == '7':
+    	elif value == 7:
     		self.print_seven()
-    	elif value == '8':
+    	elif value == 8:
     		self.print_eight()
-    	elif value == '9':
+    	elif value == 9:
     		self.print_nine()
     	elif value == '-':
     		self.print_dash()
@@ -220,3 +220,9 @@ class SevenSegmentDisplay(object):
 
     	time.sleep(duration)
         self.clear_display()
+
+class MultiDisplay(object):
+    display_pin = 0
+
+    def __init__(self, num_displays):
+        pass
