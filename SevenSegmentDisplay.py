@@ -5,33 +5,40 @@ class SevenSegmentDisplay(object):
     # what does this class do?
 
     # 7-segment Pin mapping
-    SEG_A =     4	# Top middle segment
-    SEG_B = 	17	# Top right segment
-    SEG_C = 	1	# Bottom right segment
-    SEG_D = 	22	# Bottom middle segment
-    SEG_E = 	10	# Bottom left segment
-    SEG_F = 	9	# Top left segment
-    SEG_G = 	11	# Middle segment
-    SEG_PER = 	15	# Period segment
+    segment_a = 0	# Top middle segment
+    segment_b = 0	# Top right segment
+    segment_c = 0   # Bottom right segment
+    segment_d = 0	# Bottom middle segment
+    segment_e = 0	# Bottom left segment
+    segment_f = 0   # Top left segment
+    segment_g = 0	# Middle segment
+    segment_p = 0	# Period segment
 
-    display_pin = 18
+    display_pin = 0
 
-
-    def __init__(self, display_pin=18):
-	self.display_pin = display_pin
+    def __init__(self, display_pin=18, a=4, b=17, c=1, d=22, e=10, f=9, g=11, p=15):
+        self.display_pin = display_pin
+        self.segment_a = a
+        self.segment_b = b
+        self.segment_c = c
+        self.segment_d = d
+        self.segment_e = e
+        self.segment_f = f
+        self.segment_g = g
+        self.segment_p = p
 
         # setup display
         GPIO.setmode(GPIO.BCM)               # Broadcom chip-specific pin numbers
         GPIO.setwarnings(False)
 
-        GPIO.setup(self.SEG_A, GPIO.OUT)     # declare this PIN as an OUTPUT
-        GPIO.setup(self.SEG_B, GPIO.OUT)
-        GPIO.setup(self.SEG_C, GPIO.OUT)
-        GPIO.setup(self.SEG_D, GPIO.OUT)
-        GPIO.setup(self.SEG_E, GPIO.OUT)
-        GPIO.setup(self.SEG_F, GPIO.OUT)
-        GPIO.setup(self.SEG_G, GPIO.OUT)
-        GPIO.setup(self.SEG_PER, GPIO.OUT)
+        GPIO.setup(self.segment_a, GPIO.OUT)     # declare this PIN as an OUTPUT
+        GPIO.setup(self.segment_b, GPIO.OUT)
+        GPIO.setup(self.segment_c, GPIO.OUT)
+        GPIO.setup(self.segment_d, GPIO.OUT)
+        GPIO.setup(self.segment_e, GPIO.OUT)
+        GPIO.setup(self.segment_f, GPIO.OUT)
+        GPIO.setup(self.segment_g, GPIO.OUT)
+        GPIO.setup(self.segment_p, GPIO.OUT)
 
         GPIO.setup(self.display_pin, GPIO.OUT)
 
@@ -41,147 +48,147 @@ class SevenSegmentDisplay(object):
 
     # Print 0
     def print_zero(self):
-    	GPIO.output(self.display_pin, GPIO.LOW)         # Enable display_pin
-    	GPIO.output(self.SEG_A, GPIO.HIGH)     # Light up
-    	GPIO.output(self.SEG_B, GPIO.HIGH)     # Light up
-    	GPIO.output(self.SEG_C, GPIO.HIGH)     # Light up
-    	GPIO.output(self.SEG_D, GPIO.HIGH)     # Light up
-    	GPIO.output(self.SEG_E, GPIO.HIGH)     # Light up
-    	GPIO.output(self.SEG_F, GPIO.HIGH)     # Light up
-    	GPIO.output(self.SEG_G, GPIO.LOW)
-    	GPIO.output(self.SEG_PER, GPIO.LOW)
+    	GPIO.output(self.display_pin, GPIO.LOW)
+    	GPIO.output(self.segment_a, GPIO.HIGH)
+    	GPIO.output(self.segment_b, GPIO.HIGH)
+    	GPIO.output(self.segment_c, GPIO.HIGH)
+    	GPIO.output(self.segment_d, GPIO.HIGH)
+    	GPIO.output(self.segment_e, GPIO.HIGH)
+    	GPIO.output(self.segment_f, GPIO.HIGH)
+    	GPIO.output(self.segment_g, GPIO.LOW)
+    	GPIO.output(self.segment_p, GPIO.LOW)
 
     # Print 1
     def print_one(self):
-    	GPIO.output(self.display_pin, GPIO.LOW)		   # Enable display_pin
-    	GPIO.output(self.SEG_A, GPIO.LOW)
-    	GPIO.output(self.SEG_B, GPIO.HIGH)     # Light up
-    	GPIO.output(self.SEG_C, GPIO.HIGH)     # Light up
-    	GPIO.output(self.SEG_D, GPIO.LOW)
-    	GPIO.output(self.SEG_E, GPIO.LOW)
-    	GPIO.output(self.SEG_F, GPIO.LOW)
-    	GPIO.output(self.SEG_G, GPIO.LOW)
-    	GPIO.output(self.SEG_PER, GPIO.LOW)
+    	GPIO.output(self.display_pin, GPIO.LOW)
+    	GPIO.output(self.segment_a, GPIO.LOW)
+    	GPIO.output(self.segment_b, GPIO.HIGH)
+    	GPIO.output(self.segment_c, GPIO.HIGH)
+    	GPIO.output(self.segment_d, GPIO.LOW)
+    	GPIO.output(self.segment_e, GPIO.LOW)
+    	GPIO.output(self.segment_f, GPIO.LOW)
+    	GPIO.output(self.segment_g, GPIO.LOW)
+    	GPIO.output(self.segment_p, GPIO.LOW)
 
     # Print 2
     def print_two(self):
-    	GPIO.output(self.display_pin, GPIO.LOW)		   # Enable display_pin
-    	GPIO.output(self.SEG_A, GPIO.HIGH)     # Light up
-    	GPIO.output(self.SEG_B, GPIO.HIGH)     # Light up
-    	GPIO.output(self.SEG_C, GPIO.LOW)
-    	GPIO.output(self.SEG_D, GPIO.HIGH)     # Light up
-    	GPIO.output(self.SEG_E, GPIO.HIGH)     # Light up
-    	GPIO.output(self.SEG_F, GPIO.LOW)
-    	GPIO.output(self.SEG_G, GPIO.HIGH)     # Light up
-    	GPIO.output(self.SEG_PER, GPIO.LOW)
+    	GPIO.output(self.display_pin, GPIO.LOW)
+    	GPIO.output(self.segment_a, GPIO.HIGH)
+    	GPIO.output(self.segment_b, GPIO.HIGH)
+    	GPIO.output(self.segment_c, GPIO.LOW)
+    	GPIO.output(self.segment_d, GPIO.HIGH)
+    	GPIO.output(self.segment_e, GPIO.HIGH)
+    	GPIO.output(self.segment_f, GPIO.LOW)
+    	GPIO.output(self.segment_g, GPIO.HIGH)
+    	GPIO.output(self.segment_p, GPIO.LOW)
 
     # Print 3
     def print_three(self):
-    	GPIO.output(self.display_pin, GPIO.LOW)		   # Enable display_pin
-    	GPIO.output(self.SEG_A, GPIO.HIGH)     # Light up
-    	GPIO.output(self.SEG_B, GPIO.HIGH)     # Light up
-    	GPIO.output(self.SEG_C, GPIO.HIGH)     # Light up
-    	GPIO.output(self.SEG_D, GPIO.HIGH)     # Light up
-    	GPIO.output(self.SEG_E, GPIO.LOW)
-    	GPIO.output(self.SEG_F, GPIO.LOW)
-    	GPIO.output(self.SEG_G, GPIO.HIGH)     # Light up
-    	GPIO.output(self.SEG_PER, GPIO.LOW)
+    	GPIO.output(self.display_pin, GPIO.LOW)
+    	GPIO.output(self.segment_a, GPIO.HIGH)
+    	GPIO.output(self.segment_b, GPIO.HIGH)
+    	GPIO.output(self.segment_c, GPIO.HIGH)
+    	GPIO.output(self.segment_d, GPIO.HIGH)
+    	GPIO.output(self.segment_e, GPIO.LOW)
+    	GPIO.output(self.segment_f, GPIO.LOW)
+    	GPIO.output(self.segment_g, GPIO.HIGH)
+    	GPIO.output(self.segment_p, GPIO.LOW)
 
     # Print 4
     def print_four(self):
-    	GPIO.output(self.display_pin, GPIO.LOW)		   # Enable display_pin
-    	GPIO.output(self.SEG_A, GPIO.LOW)
-    	GPIO.output(self.SEG_B, GPIO.HIGH)     # Light up
-    	GPIO.output(self.SEG_C, GPIO.HIGH)     # Light up
-    	GPIO.output(self.SEG_D, GPIO.LOW)
-    	GPIO.output(self.SEG_E, GPIO.LOW)
-    	GPIO.output(self.SEG_F, GPIO.HIGH)     # Light up
-    	GPIO.output(self.SEG_G, GPIO.HIGH)     # Light up
-    	GPIO.output(self.SEG_PER, GPIO.LOW)
+    	GPIO.output(self.display_pin, GPIO.LOW)
+    	GPIO.output(self.segment_a, GPIO.LOW)
+    	GPIO.output(self.segment_b, GPIO.HIGH)
+    	GPIO.output(self.segment_c, GPIO.HIGH)
+    	GPIO.output(self.segment_d, GPIO.LOW)
+    	GPIO.output(self.segment_e, GPIO.LOW)
+    	GPIO.output(self.segment_f, GPIO.HIGH)
+    	GPIO.output(self.segment_g, GPIO.HIGH)
+    	GPIO.output(self.segment_p, GPIO.LOW)
 
     # Print 5
     def print_five(self):
-    	GPIO.output(self.display_pin, GPIO.LOW)		   # Enable display_pin
-    	GPIO.output(self.SEG_A, GPIO.HIGH)     # Light up
-    	GPIO.output(self.SEG_B, GPIO.LOW)
-    	GPIO.output(self.SEG_C, GPIO.HIGH)     # Light up
-    	GPIO.output(self.SEG_D, GPIO.HIGH)     # Light up
-    	GPIO.output(self.SEG_E, GPIO.LOW)
-    	GPIO.output(self.SEG_F, GPIO.HIGH)     # Light up
-    	GPIO.output(self.SEG_G, GPIO.HIGH)     # Light up
-    	GPIO.output(self.SEG_PER, GPIO.LOW)
+    	GPIO.output(self.display_pin, GPIO.LOW)
+    	GPIO.output(self.segment_a, GPIO.HIGH)
+    	GPIO.output(self.segment_b, GPIO.LOW)
+    	GPIO.output(self.segment_c, GPIO.HIGH)
+    	GPIO.output(self.segment_d, GPIO.HIGH)
+    	GPIO.output(self.segment_e, GPIO.LOW)
+    	GPIO.output(self.segment_f, GPIO.HIGH)
+    	GPIO.output(self.segment_g, GPIO.HIGH)
+    	GPIO.output(self.segment_p, GPIO.LOW)
 
     # Print 6
     def print_six(self):
-    	GPIO.output(self.display_pin, GPIO.LOW)		   # Enable display_pin
-    	GPIO.output(self.SEG_A, GPIO.LOW)
-    	GPIO.output(self.SEG_B, GPIO.LOW)
-    	GPIO.output(self.SEG_C, GPIO.HIGH)     # Light up
-    	GPIO.output(self.SEG_D, GPIO.HIGH)     # Light up
-    	GPIO.output(self.SEG_E, GPIO.HIGH)     # Light up
-    	GPIO.output(self.SEG_F, GPIO.HIGH)     # Light up
-    	GPIO.output(self.SEG_G, GPIO.HIGH)     # Light up
-    	GPIO.output(self.SEG_PER, GPIO.LOW)
+    	GPIO.output(self.display_pin, GPIO.LOW)
+    	GPIO.output(self.segment_a, GPIO.LOW)
+    	GPIO.output(self.segment_b, GPIO.LOW)
+    	GPIO.output(self.segment_c, GPIO.HIGH)
+    	GPIO.output(self.segment_d, GPIO.HIGH)
+    	GPIO.output(self.segment_e, GPIO.HIGH)
+    	GPIO.output(self.segment_f, GPIO.HIGH)
+    	GPIO.output(self.segment_g, GPIO.HIGH)
+    	GPIO.output(self.segment_p, GPIO.LOW)
 
     # Print 7
     def print_seven(self):
-    	GPIO.output(self.display_pin, GPIO.LOW)		   # Enable display_pin
-    	GPIO.output(self.SEG_A, GPIO.HIGH)     # Light up
-    	GPIO.output(self.SEG_B, GPIO.HIGH)     # Light up
-    	GPIO.output(self.SEG_C, GPIO.HIGH)     # Light up
-    	GPIO.output(self.SEG_D, GPIO.LOW)
-    	GPIO.output(self.SEG_E, GPIO.LOW)
-    	GPIO.output(self.SEG_F, GPIO.LOW)
-    	GPIO.output(self.SEG_G, GPIO.LOW)
-    	GPIO.output(self.SEG_PER, GPIO.LOW)
+    	GPIO.output(self.display_pin, GPIO.LOW)
+    	GPIO.output(self.segment_a, GPIO.HIGH)
+    	GPIO.output(self.segment_b, GPIO.HIGH)
+    	GPIO.output(self.segment_c, GPIO.HIGH)
+    	GPIO.output(self.segment_d, GPIO.LOW)
+    	GPIO.output(self.segment_e, GPIO.LOW)
+    	GPIO.output(self.segment_f, GPIO.LOW)
+    	GPIO.output(self.segment_g, GPIO.LOW)
+    	GPIO.output(self.segment_p, GPIO.LOW)
 
     # Print 8
     def print_eight(self):
-    	GPIO.output(self.display_pin, GPIO.LOW)         # Enable display_pin
-    	GPIO.output(self.SEG_A, GPIO.HIGH)     # Light up
-    	GPIO.output(self.SEG_B, GPIO.HIGH)     # Light up
-    	GPIO.output(self.SEG_C, GPIO.HIGH)     # Light up
-    	GPIO.output(self.SEG_D, GPIO.HIGH)     # Light up
-    	GPIO.output(self.SEG_E, GPIO.HIGH)     # Light up
-    	GPIO.output(self.SEG_F, GPIO.HIGH)     # Light up
-    	GPIO.output(self.SEG_G, GPIO.HIGH)     # Light up
-    	GPIO.output(self.SEG_PER, GPIO.LOW)
+    	GPIO.output(self.display_pin, GPIO.LOW)
+    	GPIO.output(self.segment_a, GPIO.HIGH)
+    	GPIO.output(self.segment_b, GPIO.HIGH)
+    	GPIO.output(self.segment_c, GPIO.HIGH)
+    	GPIO.output(self.segment_d, GPIO.HIGH)
+    	GPIO.output(self.segment_e, GPIO.HIGH)
+    	GPIO.output(self.segment_f, GPIO.HIGH)
+    	GPIO.output(self.segment_g, GPIO.HIGH)
+    	GPIO.output(self.segment_p, GPIO.LOW)
 
     # Print 9
     def print_nine(self):
-    	GPIO.output(self.display_pin, GPIO.LOW)		   # Enable display_pin
-    	GPIO.output(self.SEG_A, GPIO.HIGH)     # Light up
-    	GPIO.output(self.SEG_B, GPIO.HIGH)     # Light up
-    	GPIO.output(self.SEG_C, GPIO.HIGH)     # Light up
-    	GPIO.output(self.SEG_D, GPIO.LOW)
-    	GPIO.output(self.SEG_E, GPIO.LOW)
-    	GPIO.output(self.SEG_F, GPIO.HIGH)     # Light up
-    	GPIO.output(self.SEG_G, GPIO.HIGH)     # Light up
-    	GPIO.output(self.SEG_PER, GPIO.LOW)
+    	GPIO.output(self.display_pin, GPIO.LOW)
+    	GPIO.output(self.segment_a, GPIO.HIGH)
+    	GPIO.output(self.segment_b, GPIO.HIGH)
+    	GPIO.output(self.segment_c, GPIO.HIGH)
+    	GPIO.output(self.segment_d, GPIO.LOW)
+    	GPIO.output(self.segment_e, GPIO.LOW)
+    	GPIO.output(self.segment_f, GPIO.HIGH)
+    	GPIO.output(self.segment_g, GPIO.HIGH)
+    	GPIO.output(self.segment_p, GPIO.LOW)
 
     # Print Dash
     def print_dash(self):
     	GPIO.output(self.display_pin, GPIO.LOW)
-    	GPIO.output(self.SEG_A, GPIO.LOW)
-    	GPIO.output(self.SEG_B, GPIO.LOW)
-    	GPIO.output(self.SEG_C, GPIO.LOW)
-    	GPIO.output(self.SEG_D, GPIO.LOW)
-    	GPIO.output(self.SEG_E, GPIO.LOW)
-    	GPIO.output(self.SEG_F, GPIO.LOW)
-    	GPIO.output(self.SEG_G, GPIO.HIGH)
-    	GPIO.output(self.SEG_PER, GPIO.LOW)
+    	GPIO.output(self.segment_a, GPIO.LOW)
+    	GPIO.output(self.segment_b, GPIO.LOW)
+    	GPIO.output(self.segment_c, GPIO.LOW)
+    	GPIO.output(self.segment_d, GPIO.LOW)
+    	GPIO.output(self.segment_e, GPIO.LOW)
+    	GPIO.output(self.segment_f, GPIO.LOW)
+    	GPIO.output(self.segment_g, GPIO.HIGH)
+    	GPIO.output(self.segment_p, GPIO.LOW)
 
     # Print Period
     def print_period(self):
     	GPIO.output(self.display_pin, GPIO.LOW)
-    	GPIO.output(self.SEG_A, GPIO.LOW)
-    	GPIO.output(self.SEG_B, GPIO.LOW)
-    	GPIO.output(self.SEG_C, GPIO.LOW)
-    	GPIO.output(self.SEG_D, GPIO.LOW)
-    	GPIO.output(self.SEG_E, GPIO.LOW)
-    	GPIO.output(self.SEG_F, GPIO.LOW)
-    	GPIO.output(self.SEG_G, GPIO.LOW)
-    	GPIO.output(self.SEG_PER, GPIO.HIGH)
+    	GPIO.output(self.segment_a, GPIO.LOW)
+    	GPIO.output(self.segment_b, GPIO.LOW)
+    	GPIO.output(self.segment_c, GPIO.LOW)
+    	GPIO.output(self.segment_d, GPIO.LOW)
+    	GPIO.output(self.segment_e, GPIO.LOW)
+    	GPIO.output(self.segment_f, GPIO.LOW)
+    	GPIO.output(self.segment_g, GPIO.LOW)
+    	GPIO.output(self.segment_p, GPIO.HIGH)
 
     def flash_digit(self, value, duration):
     	if value == '0':
