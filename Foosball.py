@@ -1,18 +1,40 @@
 class FoosballPlayer(object):
-	pass
+	wins = 0
+	name = ""
+
+	def __init__(self, name):
+		self.wins = 0
+		self.name = name
+
+	def set_name(self, name):
+		self.name = name
+
+	def win_match(self):
+		self.wins += 1
+
+		print "Match Winner!  Player %s" % self.name
+
 
 class FoosballTeam(object):
 	wins =	0
 	score = 0
 	name = ""
 
-	def __init__(self, name):
+	player1 = FoosballPlayer("")
+	player2 = FoosballPlayer("")
+
+	def __init__(self, name="", player1=FoosballPlayer(""), player2=FoosballPlayer("")):
 		self.wins = 0
 		self.score = 0
 		self.name = name
+		self.player1 = player1
+		self.player2 = player2
 
 	def display_score(self):
 		return "%d - %d" % (self.wins, self.score)
+
+	def display_team(self):
+		return "Team %s:  %s and %s" % (self.name, self.player1.name, self.player2.name)
 
 	def score_goal(self):
 		self.score += 1
@@ -80,5 +102,8 @@ class FoosballMatch(object):
 		# TODO - make a reset function?
 		self.team1.wins = 0
 		self.team2.wins = 0
+
+		team.player1.win_match()
+		team.player2.win_match()
 
 		print "Match Winner!  Team %s" % team.name
