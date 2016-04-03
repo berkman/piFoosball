@@ -2,6 +2,8 @@ class FoosballPlayer(object):
 	wins = 0
 	name = ""
 
+	#TODO:  save this information to file/database
+
 	def __init__(self, name):
 		self.wins = 0
 		self.name = name
@@ -13,7 +15,6 @@ class FoosballPlayer(object):
 		self.wins += 1
 
 		print "Match Winner!  Player %s" % self.name
-
 
 class FoosballTeam(object):
 	wins =	0
@@ -80,12 +81,15 @@ class FoosballMatch(object):
 
 	game = FoosballGame(0)
 
+	winner = False
+
 	def __init__(self, max_wins, max_score, team1=FoosballTeam(""), team2=FoosballTeam("")):
 		#TODO - must be more than 1 match, 1 game
 		self.max_wins = max_wins
 		self.team1 = team1
 		self.team2 = team2
 		self.game = FoosballGame(max_score, self.team1, self.team2)
+		self.winner = False
 
 	def display_score(self):
 		return "%s(%d) %d : %d %s(%d)" % \
@@ -99,6 +103,8 @@ class FoosballMatch(object):
 			self.win_match(team)
 
 	def win_match(self, team):
+		self.winner = True
+
 		# TODO - make a reset function?
 		self.team1.wins = 0
 		self.team2.wins = 0
