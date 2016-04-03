@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 
 from Foosball import FoosballMatch, FoosballTeam, FoosballPlayer
+from random import randint
+
+print(randint(0,9))
 
 my_match = FoosballMatch(2, 5,
     FoosballTeam("Ohio", FoosballPlayer("Drew"), FoosballPlayer("Mike")),
