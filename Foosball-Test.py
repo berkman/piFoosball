@@ -12,7 +12,7 @@ print my_match.team1.display_team()
 print my_match.team2.display_team()
 #for i in range(20):
 while my_match.winner is False:
-    print my_match.display_score()
+    print my_match.get_score()
 
     scoring_team = randint(1,2)
 
@@ -21,10 +21,10 @@ while my_match.winner is False:
     elif scoring_team == 2:
         my_match.score_goal(my_match.team2)
 
-print my_match.team1.player1.wins
-print my_match.team1.player2.wins
-print my_match.team2.player1.wins
-print my_match.team2.player2.wins
+print my_match.team1.player1.get_wins()
+print my_match.team1.player2.get_wins()
+print my_match.team2.player1.get_wins()
+print my_match.team2.player2.get_wins()
 
 '''
 pseudo code

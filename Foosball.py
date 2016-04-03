@@ -16,6 +16,9 @@ class FoosballPlayer(object):
 
 		print "Match Winner!  Player %s" % self.name
 
+	def get_wins(self):
+		return "%s:  %s win(s)" % (self.name, self.wins)
+
 class FoosballTeam(object):
 	wins =	0
 	score = 0
@@ -91,7 +94,7 @@ class FoosballMatch(object):
 		self.game = FoosballGame(max_score, self.team1, self.team2)
 		self.winner = False
 
-	def display_score(self):
+	def get_score(self):
 		return "%s(%d) %d : %d %s(%d)" % \
 			(self.team1.name, self.team1.wins, self.team1.score,
 			self.team2.score, self.team2.name, self.team2.wins)
