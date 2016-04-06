@@ -1,58 +1,45 @@
 #!/usr/bin/env python
 
-from Foosball import FoosballMatch, FoosballTeam
+from Foosball import FoosballMatch, FoosballTeam, FoosballPlayer
+from random import randint
 
-my_match = FoosballMatch(2, 5, FoosballTeam("mike"), FoosballTeam("drew"))
+players = [
+    FoosballPlayer("Drew"),
+    FoosballPlayer("Mike"),
+    FoosballPlayer("Eric"),
+    FoosballPlayer("Jedidiah"),
+    FoosballPlayer("Alex"),
+    FoosballPlayer("Christian")
+    ]
 
-print my_match.display_score()
+## TODO: randomize the teams/pairings?  save to file?
 
-my_match.score_goal(my_match.team1)
-print my_match.display_score()
+for i in range(5):
+    my_match = FoosballMatch(
+        2,
+        5,
+        FoosballTeam("Ohio", players[0], players[1]),
+        FoosballTeam("SLC", players[2], players[3])
+        )
 
-my_match.score_goal(my_match.team1)
-print my_match.display_score()
+    print my_match.team1.display_team()
+    print my_match.team2.display_team()
 
-my_match.score_goal(my_match.team2)
-print my_match.display_score()
+    while my_match.winner is False:
+        print my_match.get_score()
 
-my_match.score_goal(my_match.team1)
-print my_match.display_score()
+        scoring_team = randint(1,2)
 
-my_match.score_goal(my_match.team1)
-print my_match.display_score()
+        if scoring_team == 1:
+            my_match.score_goal(my_match.team1)
+        elif scoring_team == 2:
+            my_match.score_goal(my_match.team2)
 
-my_match.score_goal(my_match.team1)
-print my_match.display_score()
+    for player in players:
+        print player.get_wins()
 
-my_match.score_goal(my_match.team2)
-print my_match.display_score()
 
-my_match.score_goal(my_match.team1)
-print my_match.display_score()
-
-my_match.score_goal(my_match.team1)
-print my_match.display_score()
-
-my_match.score_goal(my_match.team1)
-print my_match.display_score()
-
-my_match.score_goal(my_match.team1)
-print my_match.display_score()
-
-my_match.score_goal(my_match.team2)
-print my_match.display_score()
-
-my_match.score_goal(my_match.team2)
-print my_match.display_score()
-
-my_match.score_goal(my_match.team2)
-print my_match.display_score()
-
-my_match.score_goal(my_match.team2)
-print my_match.display_score()
-
-my_match.score_goal(my_match.team1)
-print my_match.display_score()
-
-my_match.score_goal(my_match.team1)
-print my_match.display_score()
+'''
+-keep statistics not only for individual wins, but wins by pairing/team
+-winners stay at table
+'''
